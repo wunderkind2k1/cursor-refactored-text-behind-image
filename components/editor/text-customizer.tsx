@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import InputField from './input-field';
 import SliderField from './slider-field';
 import ColorPicker from './color-picker';
-import FontFamilyPicker from './font-picker'; 
+import FontFamilyPicker from './font-picker';
 import { Button } from '../ui/button';
 import {
   AccordionContent,
@@ -29,13 +29,12 @@ interface TextCustomizerProps {
         tiltX: number;
         tiltY: number;
     };
-    handleAttributeChange: (id: number, attribute: string, value: any) => void;
+    onAttributeChange: (id: number, attribute: string, value: any) => void;
     removeTextSet: (id: number) => void;
     duplicateTextSet: (textSet: any) => void;
-    userId: string;
 }
 
-const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttributeChange, removeTextSet, duplicateTextSet, userId }) => {
+const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, onAttributeChange, removeTextSet, duplicateTextSet }) => {
     const [activeControl, setActiveControl] = useState<string | null>(null);
 
     const controls = [
@@ -81,7 +80,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 attribute="text"
                                 label="Text"
                                 currentValue={textSet.text}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -89,8 +88,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                             <FontFamilyPicker
                                 attribute="fontFamily"
                                 currentFont={textSet.fontFamily}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
-                                userId={userId}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -99,7 +97,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 attribute="color"
                                 label="Text Color"
                                 currentColor={textSet.color}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -112,7 +110,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                     max={200}
                                     step={1}
                                     currentValue={textSet.left}
-                                    handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                    handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                                 />
                                 <SliderField
                                     attribute="top"
@@ -121,7 +119,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                     max={100}
                                     step={1}
                                     currentValue={textSet.top}
-                                    handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                    handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                                 />
                             </div>
                         )}
@@ -134,7 +132,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={800}
                                 step={1}
                                 currentValue={textSet.fontSize}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -146,7 +144,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={900}
                                 step={100}
                                 currentValue={textSet.fontWeight}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -158,7 +156,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={1}
                                 step={0.01}
                                 currentValue={textSet.opacity}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -170,7 +168,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={360}
                                 step={1}
                                 currentValue={textSet.rotation}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -182,7 +180,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={45}
                                 step={1}
                                 currentValue={textSet.tiltX}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
 
@@ -194,7 +192,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                                 max={45}
                                 step={1}
                                 currentValue={textSet.tiltY}
-                                handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                                handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                             />
                         )}
                     </div>
@@ -206,20 +204,19 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         attribute="text"
                         label="Text"
                         currentValue={textSet.text}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <FontFamilyPicker
                         attribute="fontFamily"
                         currentFont={textSet.fontFamily}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
-                        userId={userId}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <div className='flex flex-row items-start justify-start gap-10 w-full'>
                         <ColorPicker
                             attribute="color"
                             label="Text Color"
                             currentColor={textSet.color}
-                            handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                            handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                         />
                     </div>
                     <SliderField
@@ -229,7 +226,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={200}
                         step={1}
                         currentValue={textSet.left}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="top"
@@ -238,7 +235,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={100}
                         step={1}
                         currentValue={textSet.top}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="fontSize"
@@ -247,7 +244,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={800}
                         step={1}
                         currentValue={textSet.fontSize}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="fontWeight"
@@ -256,7 +253,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={900}
                         step={100}
                         currentValue={textSet.fontWeight}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="opacity"
@@ -265,7 +262,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={1}
                         step={0.01}
                         currentValue={textSet.opacity}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="rotation"
@@ -274,7 +271,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={360}
                         step={1}
                         currentValue={textSet.rotation}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="tiltX"
@@ -283,7 +280,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={45}
                         step={1}
                         currentValue={textSet.tiltX}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                     <SliderField
                         attribute="tiltY"
@@ -292,7 +289,7 @@ const TextCustomizer: React.FC<TextCustomizerProps> = ({ textSet, handleAttribut
                         max={45}
                         step={1}
                         currentValue={textSet.tiltY}
-                        handleAttributeChange={(attribute, value) => handleAttributeChange(textSet.id, attribute, value)}
+                        handleAttributeChange={(attribute, value) => onAttributeChange(textSet.id, attribute, value)}
                     />
                 </div>
 
